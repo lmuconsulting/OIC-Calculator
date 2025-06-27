@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OIC Qualification Calculator</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>IRS Offer in Compromise Calculator</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #f4f6f8;
       margin: 0;
       padding: 0;
     }
     .container {
-      max-width: 700px;
+      max-width: 800px;
       margin: 40px auto;
       background: #ffffff;
       padding: 30px;
@@ -22,159 +21,178 @@
     }
     h1 {
       font-size: 24px;
-      color: #0a3d62;
       text-align: center;
-      margin-bottom: 30px;
-    }
-    h2 {
-      font-size: 18px;
-      color: #34495e;
-      margin-top: 25px;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 5px;
+      color: #2c3e50;
     }
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: 500;
-      color: #2f3640;
+      margin-top: 20px;
+      font-weight: 600;
     }
-    .dollar-input {
+    .input-group {
       display: flex;
       align-items: center;
-      margin-top: 6px;
+      margin-top: 5px;
     }
-    .dollar-input span {
+    .input-group span {
       padding: 10px;
-      background-color: #ecf0f1;
-      border: 1px solid #dcdde1;
+      background: #ecf0f1;
+      border: 1px solid #ccc;
       border-radius: 6px 0 0 6px;
-      font-size: 16px;
-      color: #2d3436;
     }
-    .dollar-input input[type="number"] {
+    .input-group input {
       width: 100%;
       padding: 10px;
-      border: 1px solid #dcdde1;
+      border: 1px solid #ccc;
       border-left: none;
       border-radius: 0 6px 6px 0;
-      box-sizing: border-box;
       font-size: 16px;
     }
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-    .radio-group label {
-      display: inline-block;
-      margin-right: 20px;
-      margin-top: 10px;
-    }
-    button {
-      background-color: #0984e3;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      margin-top: 25px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      width: 100%;
-    }
-    button:hover {
-      background-color: #74b9ff;
-    }
-    .result {
-      margin-top: 30px;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: #dff9fb;
-      color: #130f40;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-    }
-    input[type=number]::-webkit-outer-spin-button,
-    input[type=number]::-webkit-inner-spin-button {
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-    input[type=number] {
+    input[type=text] {
       -moz-appearance: textfield;
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px;
+      width: 100%;
+      background-color: #2980b9;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3498db;
+    }
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background: #dff9fb;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .results h2 {
+      margin-bottom: 10px;
+      color: #130f40;
+    }
+    .disclaimer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+    .asterisk {
+      color: red;
+      font-weight: bold;
+      display: none;
+      margin-left: 6px;
+    }
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Offer in Compromise Qualification Calculator</h1>
+    <h1>IRS Offer in Compromise Calculator</h1>
 
-    <label for="irsDebt">Total IRS Debt:</label>
-    <div class="dollar-input">
+    <label for="assetValue">Total Asset Value:</label>
+    <div class="input-group">
       <span>$</span>
-      <input type="number" id="irsDebt" placeholder="Enter IRS Debt - (estimated or exact)" aria-label="Total IRS Debt" />
+      <input type="text" id="assetValue" placeholder="Enter total asset value" />
     </div>
 
-    <h2>Monthly Income</h2>
-    <label for="monthlyIncome">Total Monthly Income:</label>
-    <div class="dollar-input">
+    <label for="monthlyIncome">Monthly Income:</label>
+    <div class="input-group">
       <span>$</span>
-      <input type="number" id="monthlyIncome" placeholder="Enter total household income" aria-label="Total Monthly Income" />
+      <input type="text" id="monthlyIncome" placeholder="Enter monthly income" />
     </div>
 
-    <h2>Monthly Living Expenses</h2>
-    <label for="monthlyExpenses">Total Monthly Expenses:</label>
-    <div class="dollar-input">
+    <label for="monthlyExpenses">Monthly Expenses:</label>
+    <div class="input-group">
       <span>$</span>
-      <input type="number" id="monthlyExpenses" placeholder="Enter allowable living expenses" aria-label="Total Monthly Expenses" />
+      <input type="text" id="monthlyExpenses" placeholder="Enter monthly expenses" />
     </div>
 
-    <h2>Assets</h2>
-    <label for="assetEquity">Total Asset Equity:</label>
-    <div class="dollar-input">
-      <span>$</span>
-      <input type="number" id="assetEquity" placeholder="Total Value of cash, property, vehicles, etc." aria-label="Total Asset Equity" />
+    <label for="monthsOffer">Number of Months (typically 12 or 24):</label>
+    <select id="monthsOffer">
+      <option value="12">12 months</option>
+      <option value="24">24 months</option>
+    </select>
+
+    <div class="disclaimer">
+      <label>
+        <input type="checkbox" id="disclaimerCheck" />
+        I understand this calculator is for estimation purposes only. Actual IRS Offer in Compromise results are subject to verification of allowable living expenses, national standards, and accurate debt and income figures. <a href="https://www.irs.gov/payments/offer-in-compromise" target="_blank">Learn more</a> | <a href="https://www.irs.gov/businesses/small-businesses-self-employed/collection-financial-standards" target="_blank">IRS Financial Standards</a>
+        <span id="asterisk" class="asterisk">*</span>
+      </label>
+      <div id="errorMsg" class="error-message">Please complete all fields before continuing.</div>
     </div>
 
-    <h2>Offer Type</h2>
-    <div class="radio-group">
-      <label><input type="radio" name="offerType" value="12" checked /> Lump Sum (12x Disposable Income)</label>
-      <label><input type="radio" name="offerType" value="24" /> Periodic Payment (24x Disposable Income)</label>
-    </div>
+    <button onclick="calculateOffer()">Calculate Offer</button>
 
-    <button onclick="calculateOIC()">Calculate</button>
-
-    <div class="result" id="result"></div>
+    <div id="output" class="results"></div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('input[type="number"]').forEach(input => {
-        input.addEventListener('keypress', e => {
-          if (e.key === 'Enter') e.preventDefault();
-        });
+    function formatCurrency(value) {
+      return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    function parseInput(id) {
+      const raw = document.getElementById(id).value.replace(/,/g, '');
+      return parseFloat(raw) || 0;
+    }
+
+    function formatInputField(id) {
+      const input = document.getElementById(id);
+      input.addEventListener('input', () => {
+        const num = input.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+        if (!isNaN(num) && num !== '') {
+          const parts = num.split('.');
+          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          input.value = parts.join('.');
+        }
       });
-    });
+    }
 
-    function calculateOIC() {
-      const irsDebt = parseFloat(document.getElementById('irsDebt').value) || 0;
-      const income = parseFloat(document.getElementById('monthlyIncome').value) || 0;
-      const expenses = parseFloat(document.getElementById('monthlyExpenses').value) || 0;
-      const assetEquity = parseFloat(document.getElementById('assetEquity').value) || 0;
-      const offerMultiplier = parseInt(document.querySelector('input[name="offerType"]:checked').value);
+    ['assetValue', 'monthlyIncome', 'monthlyExpenses'].forEach(formatInputField);
 
-      if (!Number.isFinite(irsDebt) || !Number.isFinite(income) || !Number.isFinite(expenses) || !Number.isFinite(assetEquity)) {
-        document.getElementById('result').innerText = 'Please enter valid numbers in all fields.';
+    function calculateOffer() {
+      const checkbox = document.getElementById('disclaimerCheck');
+      const asterisk = document.getElementById('asterisk');
+      const errorMsg = document.getElementById('errorMsg');
+      if (!checkbox.checked) {
+        asterisk.style.display = 'inline';
+        errorMsg.style.display = 'block';
         return;
+      } else {
+        asterisk.style.display = 'none';
+        errorMsg.style.display = 'none';
       }
 
-      const disposableIncome = Math.max(income - expenses, 0);
-      const futureIncomeContribution = disposableIncome * offerMultiplier;
-      const rcp = assetEquity + futureIncomeContribution;
+      const assets = parseInput('assetValue');
+      const income = parseInput('monthlyIncome');
+      const expenses = parseInput('monthlyExpenses');
+      const months = parseInt(document.getElementById('monthsOffer').value);
 
-      const resultText = rcp < irsDebt
-        ? `You may qualify. Your Reasonable Collection Potential (RCP) is $${rcp.toFixed(2)}, which is less than your IRS debt.`
-        : `You may not qualify. Your RCP is $${rcp.toFixed(2)}, which is equal to or more than your IRS debt.`;
+      const disposable = income - expenses;
+      const offer = (disposable > 0 ? disposable * months : 0) + assets;
 
-      document.getElementById('result').innerText = resultText;
+      document.getElementById('output').innerHTML = `
+        <h2>Estimated Offer in Compromise</h2>
+        Total Disposable Income over ${months} months: ${formatCurrency(disposable * months)}<br/>
+        Total Asset Value: ${formatCurrency(assets)}<br/>
+        <strong>Offer Amount: ${formatCurrency(offer)}</strong>
+      `;
     }
   </script>
 </body>
